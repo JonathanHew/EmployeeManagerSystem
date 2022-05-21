@@ -11,6 +11,8 @@ function App() {
   const [position, setPosition] = useState("");
   const [wage, setWage] = useState(0);
 
+  const [employeeList, setEmployeeList] = useState([]);
+
   const addEmployee = () => {
     //send info from frontend to backend
     Axios.post("http://localhost:3001/create", {
@@ -21,6 +23,15 @@ function App() {
       wage: wage,
     }).then(() => {
       console.log("success");
+    });
+  };
+
+  //function to get employees 
+  // this is run when the Show employees button is clicked
+  const getEmployees = () => {
+    //Axios request to employees list from backend then put it into response 
+    Axios.get("http://localhost:3001/employees").then((response) => {
+      console.log(response); 
     });
   };
 
@@ -64,9 +75,8 @@ function App() {
         />
         <button onClick={addEmployee}>Add Employee</button>
       </div>
-      -----------------------------------------------------------------------------------------------------
       <div className="employees">
-        <button>Show Employees</button>
+        <button onClick={getEmployees}>Show Employees</button>
       </div>
     </div>
   );

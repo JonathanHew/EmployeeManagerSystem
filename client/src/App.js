@@ -22,16 +22,26 @@ function App() {
       position: position,
       wage: wage,
     }).then(() => {
-      console.log("success");
+      //array destructuring ading values into array without push
+      setEmployeeList([
+        ...employeeList,
+        {
+          name: name,
+          age: age,
+          country: country,
+          position: position,
+          wage: wage,
+        },
+      ]);
     });
   };
 
-  //function to get employees 
+  //function to get employees
   // this is run when the Show employees button is clicked
   const getEmployees = () => {
-    //Axios request to employees list from backend then put it into response 
+    //Axios request to employees list from backend then put it into response
     Axios.get("http://localhost:3001/employees").then((response) => {
-      console.log(response); 
+      setEmployeeList(response.data);
     });
   };
 
@@ -77,6 +87,18 @@ function App() {
       </div>
       <div className="employees">
         <button onClick={getEmployees}>Show Employees</button>
+
+        {employeeList.map((val, key) => {
+          return (
+            <div className="employee">
+              <h3>Name: {val.name}</h3>
+              <h3>Age: {val.age}</h3>
+              <h3>Country: {val.country}</h3>
+              <h3>Position: {val.position}</h3>
+              <h3>Wage: {val.wage}</h3>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

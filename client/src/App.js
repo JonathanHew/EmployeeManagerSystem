@@ -40,7 +40,13 @@ function App() {
 
   //function to delete an employeesa record 
   const deleteEmployee = (id) => {
-    Axios.delete("http://localhost:3001/delete/")
+    Axios.delete(`http://localhost:3001/delete/${id}`).then((response)=> {
+      setEmployeeList(
+        employeeList.filter((val) => {
+        return val.id !== id;
+        })
+      );
+    });
   }
 
   //function to get employees

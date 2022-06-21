@@ -38,6 +38,11 @@ function App() {
     });
   };
 
+  //function to delete an employeesa record 
+  const deleteEmployee = (id) => {
+    Axios.delete("http://localhost:3001/delete/")
+  }
+
   //function to get employees
   // this is run when the Show employees button is clicked
   const getEmployees = () => {
@@ -136,6 +141,10 @@ function App() {
                   }}
                 >
                   Update
+                </button>
+
+                <button onClick = {()=> {deleteEmployee(val.id)}}>
+                  Delete
                 </button>
               </div>
             </div>
